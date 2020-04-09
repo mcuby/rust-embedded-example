@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "cortex-debug.armToolchainPath": "/home/mcuby/Downloads/gcc-arm-none-eabi-8-2019-q3-update/bin",
+    "configurations": [
+        {            
+            "name": "Debug empty",
+            "request": "launch",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceFolder}/target/thumbv7em-none-eabihf/debug/empty",
+            "svdFile": "${workspaceFolder}/STM32F7x6.svd",
+            "servertype": "openocd",
+            "configFiles": ["STM32F7x6.cfg"],
+            "preLaunchTask": "Build binary",         
+
+          
+            "preLaunchCommands": [
+                "monitor init",
+                "monitor reset init",
+                "monitor halt",
+                "monitor flash write_image erase ./target/thumbv7em-none-eabihf/build/empty.bin 0x08000000"
+            ],
+            "postLaunchCommands": ["monitor reset halt"] 
+        }
+    ]    
+}
+
